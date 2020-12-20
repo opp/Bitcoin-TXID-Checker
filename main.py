@@ -4,9 +4,13 @@ import requests
 import time
 import json
 
-userSettings = json.loads(open("settings.json", "r").read())
-webhookURL = userSettings["webhook"]
-userID = userSettings["userID"]
+try:
+    userSettings = json.loads(open("settings.json", "r").read())
+    webhookURL = userSettings["webhook"]
+    userID = userSettings["userID"]
+except Exception as error:
+    print(f"[-- {error} --]\n$ Couldn't load the settings.json file.")
+    exit()
 
 hook = Webhook(webhookURL)
 
